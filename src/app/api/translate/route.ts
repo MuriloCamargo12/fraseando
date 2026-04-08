@@ -8,7 +8,7 @@ export async function POST(req: any) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-API-Key": process.env.translate,
+        "X-API-Key": process.env.translate as string,
       },
       
       body: JSON.stringify({
