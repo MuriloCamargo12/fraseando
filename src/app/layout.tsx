@@ -31,7 +31,7 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-screen flex flex-col bg-[url('/paisagem.jpg')] bg-cover bg-center bg-no-repeat">
+      <body className="min-h-[100dvh] flex flex-col bg-[url('/paisagem.jpg')] bg-cover bg-center bg-no-repeat">
       <FavoritosProvider>
       <ConfigProvider>
         <Header />
