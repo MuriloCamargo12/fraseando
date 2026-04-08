@@ -89,7 +89,7 @@ export default function Main() {
     }
 
     return (
-        <main className="flex justify-center items-center flex-col gap-5">
+        <main className="flex justify-center items-center flex-col gap-5 flex-1">
             <div className="flex flex-col md:w-2/5 w-full h-52 bg-gray-200 shadow-lg justify-start md:justify-center p-10 rounded-md text-blue-900 gap-3 overflow-y-auto overflow-x-hidden min-h-0">
                 {loading ? (
                     <div className="flex justify-center items-center w-full h-full">
