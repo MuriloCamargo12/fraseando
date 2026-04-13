@@ -11,13 +11,11 @@ export async function GET() {
         const data = await resp.json()
 
         return NextResponse.json(data)
-    } catch (error) {
-        console.error("Erro na API:", error)
-
+    } catch {
         return NextResponse.json(
             [
                 {
-                    q: "Não foi possível carregar a frase.",
+                    q: "Limite atingido: você pode gerar até 5 frases a cada 30 segundos.",
                     a: "Sistema"
                 }
             ],

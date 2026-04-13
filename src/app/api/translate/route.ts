@@ -1,31 +1,38 @@
-import { NextResponse } from "next/server";
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function POST(req: any) {
+export async function POST(req: Request) {
   try {
     const { text } = await req.json();
+
     const res = await fetch("https://api.langbly.com/language/translate/v2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-API-Key": process.env.translate as string,
+        "X-API-Key": process.env.TRANSLATE as string,
       },
-      
+
       body: JSON.stringify({
         q: text,
         target: "pt",
       }),
     });
 
+    if (!res.ok) {
+      throw new Error("Erro na API externa");
+    }
+
     const data = await res.json();
-
-    return NextResponse.json(data);
-
-  } catch (erro) {
-
-    return NextResponse.json(
-      { error: `Erro ao traduzir ${erro}` },
-      { status: 500 },
-    );
+    return Response.json(data);
+  } catch {
+  return Response.json(
+    {
+      data: {
+        translations: [
+          {
+            translatedText: "Não foi possível traduzir a frase",
+          },
+        ],
+      },
+    },
+    { status: 500 }
+  );
   }
 }

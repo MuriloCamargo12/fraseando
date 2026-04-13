@@ -38,7 +38,7 @@ export default function FavoritosProvider({ children }: { children: ReactNode })
     function adicionarFavorito(item: Favorito) {
         setFavoritos((prev) => {
 
-            if (item.frase === 'Não foi possível carregar a frase.') return prev
+            if (item.frase === 'Limite atingido: você pode gerar até 5 frases a cada 30 segundos.' || item.frase === "Não foi possível traduzir a frase") return prev
 
             const existe = prev.some(f => f.frase === item.frase)
 

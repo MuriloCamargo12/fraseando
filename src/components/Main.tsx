@@ -69,8 +69,13 @@ export default function Main() {
                         text: data[0].q,
                     }),
                 });
-                const fraseTraduzida = await respTranslate.json()
+                
+                if(!respTranslate.ok) {
+                    throw new Error("Não foi possível traduzir a frase")
+                }
 
+                const fraseTraduzida = await respTranslate.json()
+                
                 setFrase(fraseTraduzida.data.translations[0].translatedText)
                 setAutor(data[0].a)
 
@@ -80,8 +85,9 @@ export default function Main() {
             }
 
 
-        } catch (error) {
-            return `Ocorreu um erro ${error}`
+        } catch {
+            setFrase("Não foi possível traduzir a frase")
+            setAutor("Sistema")
 
         } finally {
             setLoading(false)
