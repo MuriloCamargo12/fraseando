@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📕 Fraseando
 
-## Getting Started
+Aplicação web que gera frases aleatórias com tradução automática em tempo real e funcionalidades de interação como favoritar e compartilhar.
 
-First, run the development server:
+O projeto foi desenvolvido com foco em praticar consumo de APIs e tratamentos de erros. Utilizando Next.js, React, TypeScript e APIs (Zenquotes e Langbly).
+
+---
+
+## 🚀 Deploy
+
+🔗 **Acesse o projeto online:**  
+https://fraseando-six.vercel.app/
+
+---
+
+## ▶️ Como rodar o projeto localmente
 
 ```bash
+# Clonar o repositório
+git clone https://github.com/MuriloCamargo12/fraseando.git
+
+# Entrar na pasta do projeto
+cd fraseando
+
+# Acesse https://langbly.com/ para gerar uma KEY da API
+
+# Criar arquivo .env na raiz com:
+
+TRANSLATE=SUA_API_KEY_DA_LANGBLY
+
+# Instalar dependências
+npm install
+
+# Rodar o projeto
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠️ Tecnologias utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Next.js (App Router)
+- React (Hooks)
+- TypeScript
+- Tailwind CSS
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📚 Bibliotecas utilizadas
 
-To learn more about Next.js, take a look at the following resources:
+- Tabler.io
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙️ Funcionalidades
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 🔎 Geração de frases aleatórias
+- 🌐 Opção de tradução automática das frases (EN → PT)
+- ❤️ Opção de favoritar frases
+- 📧 Opção de compartilhar frase no Whatsapp
+- ❌ Tratamento de erros da API
+- 💾 Persistência de favoritos e tradução com localStorage
+- ⏳ Estados de loading
+- 📱 Layout responsivo (mobile e desktop)
+- ✨ Interface moderna com animações suaves
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🧠 Aprendizados
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Durante o desenvolvimento deste projeto, pratiquei:
+
+- Consumo de APIs externas
+- Tratamento de erros e fallback de respostas
+- Controle de requisições (rate limiting)
+- Gerenciamento de estado assíncrono com React Hooks
+- Estruturação com App Router (Next.js)
+- Uso de variáveis de ambiente (.env)
+- Boas práticas de organização e componentização
+- Persistência de dados no navegador com localStorage
+- Deploy na Vercel
+
+---
+
+🆘 Precisa de ajuda?
+Entre em contato comigo pelo Linkedin:
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/murilo-camargo-morais-9b94463b2/)
