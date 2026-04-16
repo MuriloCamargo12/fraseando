@@ -11,6 +11,8 @@ export default function Main() {
     const [autor, setAutor] = useState("")
     const [loading, setLoading] = useState(true)
     const [ativo, setAtivo] = useState(false)
+    const [tempo, setTempo] = useState(0)
+    const [limiteAtivo, setLimiteAtivo] = useState(false)
 
     function handleSalvar() {
         setAtivo(true)
@@ -18,6 +20,20 @@ export default function Main() {
         setTimeout(() => {
             setAtivo(false)
         }, 2000)
+    }
+
+    function timer() {
+        setTempo(30)
+
+        const interval = setInterval(() => {
+            setTempo((prev) => {
+                if (prev <= 1) {
+                    clearInterval(interval)
+                    return 0
+                }
+                return prev - 1
+            })
+        }, 1000)
     }
 
     const hasFetched = useRef(false)
@@ -69,17 +85,33 @@ export default function Main() {
                         text: data[0].q,
                     }),
                 });
-                
-                if(!respTranslate.ok) {
+
+                if (!respTranslate.ok) {
                     throw new Error("Não foi possível traduzir a frase")
                 }
 
                 const fraseTraduzida = await respTranslate.json()
-                
-                setFrase(fraseTraduzida.data.translations[0].translatedText)
-                setAutor(data[0].a)
 
+                if (fraseTraduzida.data.translations[0].translatedText === 'Limite atingido: você pode gerar até 5 frases a cada 30 segundos.') {
+                    timer()
+                    setLimiteAtivo(true)
+                    setFrase(`Limite atingido: você pode gerar até 5 frases a cada`)
+                    setAutor(data[0].a)
+                } else {
+                    setLimiteAtivo(false)
+                    setFrase(fraseTraduzida.data.translations[0].translatedText)
+                    setAutor(data[0].a)
+                }
+
+
+
+            } else if (data[0].q === 'Limite atingido: você pode gerar até 5 frases a cada 30 segundos.') {
+                timer()
+                setLimiteAtivo(true)
+                setFrase(`Limite atingido: você pode gerar até 5 frases a cada`)
+                setAutor(data[0].a)
             } else {
+                setLimiteAtivo(false)
                 setFrase(data[0].q)
                 setAutor(data[0].a)
             }
@@ -105,7 +137,12 @@ export default function Main() {
                     <>
                         <div>
                             <p className="text-2xl wrap-break-word">
-                                {`"${frase}"`}
+                                {tempo > 0
+                                    ? `"${frase} ${tempo} segundos."`
+                                    : limiteAtivo
+                                        ? "Você já pode gerar uma nova frase."
+                                        : `"${frase}"`
+                                }
                             </p>
                         </div>
 
@@ -119,7 +156,7 @@ export default function Main() {
             </div>
             <div className="flex md:w-2/5 flex-col">
                 <div className="flex justify-around w-full gap-2">
-                    <button onClick={() => gerarTexto()} className="bg-blue-900 md:w-28 w-23 py-2 rounded-md cursor-pointer text-sm">Nova Frase</button>
+                    <button onClick={() => gerarTexto()} className={`bg-blue-900 md:w-28 w-23 py-2 rounded-md cursor-pointer text-sm  ${tempo ? 'hidden' : ''}`}>Nova Frase</button>
                     <button onClick={() => {
                         favoritar()
                         handleSalvar()
